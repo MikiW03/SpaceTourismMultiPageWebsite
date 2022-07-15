@@ -3,13 +3,11 @@
 </script>
 
 <template>
-    <div class="content">
-        <h1>Crew</h1>
-    </div>
+    <div class="background"></div>
 </template>
 
 <style scoped>
-.content {
+.background {
     background-image: url("../assets/crew/background-crew-desktop.jpg");
 }
 </style>
