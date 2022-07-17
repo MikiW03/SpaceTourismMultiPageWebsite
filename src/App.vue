@@ -64,7 +64,7 @@ nav {
 }
 
 nav::before {
-    --width: 475px;
+    --width: 474.5px;
 
     content: "";
     position: absolute;
@@ -75,6 +75,12 @@ nav::before {
     z-index: 10;
     top: 45px;
     left: calc(var(--width) * -1 + 30px);
+}
+
+@media (max-width: 1390px) {
+    nav::before {
+        display: none;
+    }
 }
 
 a {
@@ -109,10 +115,6 @@ a:hover {
 @media (min-width: 35.05rem) and (max-width: 55rem) {
     header {
         margin-block-start: 0;
-    }
-
-    nav::before {
-        display: none
     }
 
     ul {
@@ -163,10 +165,6 @@ a:hover {
 
     nav[data-toggled=true] {
         transform: translateX(0%)
-    }
-
-    nav::before {
-        display: none
     }
 
     ul {
