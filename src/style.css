@@ -14,6 +14,7 @@
 
 body {
   background-color: black;
+  color: var(--secondary-color)
 }
 
 .background {
@@ -32,39 +33,24 @@ h2,
 h3,
 h4 {
   font-family: "Bellefair", serif;
+  font-weight: 400;
 }
 
 h5 {
   font-family: "Barlow Condensed", sans-serif;
-}
-
-h1 {
-  font-size: 150px;
-}
-
-h2 {
-  font-size: 100px;
-}
-
-h3 {
-  font-size: 56px;
-}
-
-h4 {
-  font-size: 32px;
-}
-
-h5 {
-  font-size: 28px;
-  letter-spacing: 4.75px;
+  letter-spacing: 2.7px;
+  font-weight: 400;
 }
 
 .sub1 {
   font-family: "Bellefair", serif;
-  font-size: 28px;
 }
 
 .sub2 {
   font-family: "Barlow Condensed", sans-serif;
-  letter-spacing: 2.35px;
+}
+
+p {
+  font-family: "Barlow", sans-serif;
+  line-height: 1.65;
 }
