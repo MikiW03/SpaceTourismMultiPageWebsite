@@ -7,9 +7,10 @@ const toggled = ref(false)
 <template>
     <header>
         <img class="logo" src="./assets/shared/logo.svg" alt="logo">
-        <button class="menu-toggle"><img
-                :src="toggled ? 'src/assets/shared/icon-close.svg' : 'src/assets/shared/icon-hamburger.svg'" alt="Menu"
-                @click="toggled = !toggled"></button>
+        <button class="menu-toggle">
+            <img v-if="toggled" src="./assets/shared/icon-close.svg" alt="Menu" @click="toggled = !toggled">
+            <img v-else src="./assets/shared/icon-hamburger.svg" alt="Menu" @click="toggled = !toggled">
+        </button>
         <nav :data-toggled="toggled">
             <ul>
                 <li>
