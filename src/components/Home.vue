@@ -16,9 +16,7 @@
                 the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!
             </p>
         </article>
-        <button>
-            <span>EXPLORE</span>
-        </button>
+        <router-link to="/destination">EXPLORE</router-link>
     </section>
 </template>
 
@@ -62,9 +60,10 @@ p {
     max-width: 444px;
 }
 
-button {
+a {
     border: 0;
     border-radius: 50%;
+    background-color: var(--accent-color);
 
     width: 150px;
     aspect-ratio: 1;
@@ -72,6 +71,15 @@ button {
     font-family: "Bellefair";
     font-size: 20px;
     letter-spacing: 1.25px;
+    color: #0B0D17;
+    text-decoration: none;
+
+    display: grid;
+    place-content: center;
+}
+
+a:hover {
+    box-shadow: 0 0 0 88px rgba(255, 255, 255, 0.1036);
 }
 
 @media (min-width: 35.05rem) and (max-width: 55rem) {
@@ -100,7 +108,7 @@ button {
         font-size: 16px;
     }
 
-    button {
+    a {
         width: 242px;
 
         font-size: 32px;
@@ -144,14 +152,15 @@ button {
         text-align: left;
     }
 
-    button {
+    a {
         width: 274px;
+
         font-size: 32px;
         letter-spacing: 2px;
     }
 }
 
-@media (min-width: 32.05rem) and (max-width: 1320px) {
+@media (min-width: 55.05rem) and (max-width: 1320px) {
     section {
         gap: clamp(15px, 7vw, 100px);
     }

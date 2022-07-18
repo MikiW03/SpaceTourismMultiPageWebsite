@@ -109,7 +109,7 @@ a:hover {
     border-bottom: 3px solid rgba(255, 255, 255, 0.5);
 }
 
-.router-link-active {
+a.router-link-active {
     border-bottom: 3px solid white;
 }
 
@@ -182,7 +182,7 @@ a:hover {
         border: 0
     }
 
-    .router-link-active {
+    a.router-link-active {
         border-bottom: 0;
     }
 }
