@@ -31,6 +31,7 @@ section {
     align-items: center;
 
     gap: 81px;
+    margin-top: 48px;
 }
 
 article {
@@ -39,7 +40,7 @@ article {
     align-items: center;
     gap: 16px;
 
-    margin-top: 48px;
+
 }
 
 h5 {
@@ -89,11 +90,12 @@ a:hover {
 
     section {
         gap: 156px;
+        margin-top: 106px;
     }
 
     article {
         gap: 24px;
-        margin-top: 106px;
+
     }
 
     h5 {
@@ -126,7 +128,7 @@ a:hover {
         gap: 396px;
         justify-content: center;
         align-items: flex-end;
-        margin-top: 251px;
+        margin-top: 27.89vh;
         margin-inline: 100px;
     }
 
@@ -163,6 +165,12 @@ a:hover {
 @media (min-width: 55.05rem) and (max-width: 1320px) {
     section {
         gap: clamp(15px, 7vw, 100px);
+    }
+}
+
+@media (max-height: 750px) and (min-width: 35.05rem) {
+    section {
+        margin-top: 50px
     }
 }
 </style>

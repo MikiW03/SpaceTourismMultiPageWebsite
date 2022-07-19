@@ -73,7 +73,7 @@ const data = inject('data') as Ref<Data>
 section {
     display: flex;
     flex-direction: column;
-    margin-top: 24px;
+    margin-block: 24px;
 }
 
 .part1,
@@ -331,6 +331,12 @@ hr {
 
     .part2 {
         margin-right: 5vw;
+    }
+}
+
+@media (max-height: 850px) and (min-width: 55rem) {
+    section {
+        margin-top: 30px
     }
 }
 </style>
