@@ -1,7 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, provide, ref } from 'vue';
+
+import type { Data, Destination, CrewMember, Technology } from './types/index'
 
 const toggled = ref(false)
+
+const data = ref<Data>()
+onMounted(async () => {
+    const res = await fetch('../public/data.json');
+    const json = await res.json();
+    data.value = json as Data
+})
+provide('data', data)
+
 </script>
 
 <template>
@@ -11,8 +22,8 @@ const toggled = ref(false)
             <img v-if="toggled" src="./assets/shared/icon-close.svg" alt="Menu" @click="toggled = !toggled">
             <img v-else src="./assets/shared/icon-hamburger.svg" alt="Menu" @click="toggled = !toggled">
         </button>
-        <nav :data-toggled="toggled">
-            <ul>
+        <nav @click.self="toggled = false" :data-toggled="toggled">
+            <ul :data-toggled="toggled">
                 <li>
                     <router-link to="/">Home</router-link>
                 </li>
@@ -133,6 +144,11 @@ a.router-link-active {
 }
 
 @media (max-width: 35rem) {
+
+    header {
+        margin-block-start: 24px;
+    }
+
     .logo {
         height: 40px;
     }
@@ -155,6 +171,17 @@ a.router-link-active {
 
     nav {
         position: fixed;
+    }
+
+    nav[data-toggled=true] {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    ul {
+        position: fixed;
         left: 30vw;
         right: 0;
         top: 0;
@@ -164,7 +191,7 @@ a.router-link-active {
         transform: translateX(100%)
     }
 
-    nav[data-toggled=true] {
+    ul[data-toggled=true] {
         transform: translateX(0%)
     }
 

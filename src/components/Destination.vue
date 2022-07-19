@@ -1,4 +1,19 @@
 <script setup lang="ts">
+import { inject, Ref, ref } from 'vue';
+
+import type { Data } from '../types/index'
+
+enum destinationsSet {
+    moon,
+    mars,
+    europa,
+    titan
+}
+
+type destination = "moon" | "mars" | "europa" | "titan"
+const activeDestination = ref<destination>("moon")
+
+const data = inject('data') as Ref<Data>
 
 </script>
 
@@ -7,39 +22,43 @@
     <section>
         <article class="part1">
             <h5><span>01</span>PICK YOUR DESTINATION</h5>
-            <img src="../assets/destination/image-moon.png" alt="Moon image">
+            <img :src="'src/assets/destination/image-' + activeDestination + '.png'"
+                :alt="'image of ' + activeDestination">
         </article>
         <article class="part2">
             <nav>
                 <ul>
                     <li>
-                        <button class="active">MOON</button>
+                        <button :class="activeDestination == 'moon' ? 'active' : ''"
+                            @click="activeDestination = 'moon'">MOON</button>
                     </li>
                     <li>
-                        <button>MARS</button>
+                        <button :class="activeDestination == 'mars' ? 'active' : ''"
+                            @click="activeDestination = 'mars'">MARS</button>
                     </li>
                     <li>
-                        <button>EUROPA</button>
+                        <button :class="activeDestination == 'europa' ? 'active' : ''"
+                            @click="activeDestination = 'europa'">EUROPA</button>
                     </li>
                     <li>
-                        <button>TITAN</button>
+                        <button :class="activeDestination == 'titan' ? 'active' : ''"
+                            @click="activeDestination = 'titan'">TITAN</button>
                     </li>
                 </ul>
             </nav>
-            <h2>MOON</h2>
-            <p>See our planet as you’ve never seen it before. A perfect relaxing trip away to help regain perspective
-                and come back refreshed. While you’re there, take in some history by visiting the Luna 2 and Apollo 11
-                landing sites.
+            <h2>{{ data?.destinations[destinationsSet[activeDestination]].name }}</h2>
+            <p>
+                {{ data?.destinations[destinationsSet[activeDestination]].description }}
             </p>
             <hr>
             <div class="wrapper">
                 <div class="distance">
                     <h5 class="sub-title">AVG. DISTANCE</h5>
-                    <div class="sub1">384,400 KM</div>
+                    <div class="sub1">{{ data?.destinations[destinationsSet[activeDestination]].distance }}</div>
                 </div>
                 <div class="time">
                     <h5 class="sub-title">EST. TRAVEL TIME</h5>
-                    <div class="sub1">3 DAYS</div>
+                    <div class="sub1">{{ data?.destinations[destinationsSet[activeDestination]].travel }}</div>
                 </div>
             </div>
         </article>
@@ -122,10 +141,12 @@ h2 {
     margin-top: 20px;
 
     font-size: 56px;
-    color: var(--accent-color)
+    color: var(--accent-color);
+    text-transform: uppercase;
 }
 
 p {
+    max-width: 573px;
     margin-inline: 24px;
 
     font-family: "Barlow", sans-serif;
@@ -149,10 +170,6 @@ hr {
     gap: 12px;
 }
 
-.time {
-    margin-top: 32px;
-}
-
 .sub-title {
     color: var(--secondary-color);
     font-size: 14px;
@@ -163,9 +180,15 @@ hr {
     font-family: "Bellefair", serif;
     color: var(--accent-color);
     font-size: 28px;
+    text-transform: uppercase;
 }
 
-
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+}
 
 
 @media (min-width: 35.05rem) and (max-width: 55rem) {
@@ -210,18 +233,11 @@ hr {
     }
 
     p {
-        max-width: 573px;
-
         font-size: 16px;
     }
 
     hr {
         width: 573px;
-    }
-
-    .wrapper {
-        display: flex;
-        justify-content: center;
     }
 
     .time {
@@ -230,13 +246,91 @@ hr {
 
     .sub-title {
         align-self: center;
-        padding-inline: 4.2em;
+    }
+
+    .wrapper {
+        flex-direction: row;
+        gap: 100px;
     }
 }
 
-@media (min-width: 55rem) {
+@media (min-width: 55.01rem) {
     .background {
-        background-image: url("../assets/destination/background-destination-mobile.jpg");
+        background-image: url("../assets/destination/background-destination-desktop.jpg");
+    }
+
+    section {
+        flex-direction: row;
+        align-items: flex-end;
+
+        margin-top: 76px;
+        gap: 10.91vw
+    }
+
+    .part1 {
+        align-items: flex-start;
+        gap: 97px;
+
+        margin-left: 15.97vw;
+    }
+
+    .part2 {
+        margin-top: 0;
+        margin-right: 11.32vw;
+
+        align-items: flex-start;
+    }
+
+    h5 {
+        font-size: 28px;
+    }
+
+    img {
+        width: min(30.90vw, 470px);
+    }
+
+    button {
+        font-size: 16px;
+    }
+
+    h2 {
+        margin-top: 37px;
+        margin-bottom: 14px;
+
+        font-size: 100px;
+    }
+
+    p {
+        text-align: left;
+        margin-inline: 0;
+
+        font-size: 18px;
+        letter-spacing: 0px;
+    }
+
+    hr {
+        margin-block: 54px 28px;
+        width: 444px
+    }
+
+    .wrapper {
+        flex-direction: row;
+        gap: 79px
+    }
+
+    .distance,
+    .time {
+        align-items: flex-start;
+    }
+}
+
+@media (min-width: 55rem) and (max-width: 1200px) {
+    .part1 {
+        margin-left: 5vw;
+    }
+
+    .part2 {
+        margin-right: 5vw;
     }
 }
 </style>
