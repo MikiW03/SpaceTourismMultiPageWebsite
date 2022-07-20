@@ -264,14 +264,14 @@ hr {
         align-items: flex-end;
 
         margin-top: 76px;
-        gap: 10.91vw
+        gap: 15.81vw
     }
 
     .part1 {
         align-items: flex-start;
         gap: 97px;
 
-        margin-left: 15.97vw;
+        margin-left: 11vw;
     }
 
     .part2 {

@@ -65,6 +65,8 @@ ul {
     gap: 2em;
     position: relative;
 
+    z-index: 20;
+
     width: 100%;
     height: 100%;
 
