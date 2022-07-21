@@ -22,7 +22,7 @@ const data = inject('data') as Ref<Data>
     <section>
         <article class="part1">
             <h5><span>01</span>PICK YOUR DESTINATION</h5>
-            <img :src="'src/assets/destination/image-' + activeDestination + '.png'"
+            <img :src="'/assets/destination/image-' + activeDestination + '.png'"
                 :alt="'image of ' + activeDestination">
         </article>
         <article class="part2">

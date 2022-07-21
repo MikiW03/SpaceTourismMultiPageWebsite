@@ -87,7 +87,7 @@ function handleTouchMove(evt: TouchEvent) {
     <section @touchstart="handleTouchStart($event)" @touchmove="handleTouchMove($event)">
         <h5><span>02</span>MEET YOUR CREW</h5>
         <div class="image-box">
-            <img :src="'/src' + data?.crew[activeCrewMateIndex].images.png.slice(1)"
+            <img :src="data?.crew[activeCrewMateIndex].images.png.slice(1)"
                 :alt="'Image of ' + data?.crew[activeCrewMateIndex].name">
         </div>
         <ul>

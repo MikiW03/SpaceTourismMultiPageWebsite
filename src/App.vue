@@ -17,10 +17,10 @@ provide('data', data)
 
 <template>
     <header>
-        <img class="logo" src="./assets/shared/logo.svg" alt="logo">
+        <img class="logo" src="/assets/shared/logo.svg" alt="logo">
         <button class="menu-toggle">
-            <img v-if="toggled" src="./assets/shared/icon-close.svg" alt="Menu" @click="toggled = !toggled">
-            <img v-else src="./assets/shared/icon-hamburger.svg" alt="Menu" @click="toggled = !toggled">
+            <img v-if="toggled" src="/assets/shared/icon-close.svg" alt="Menu" @click="toggled = !toggled">
+            <img v-else src="/assets/shared/icon-hamburger.svg" alt="Menu" @click="toggled = !toggled">
         </button>
         <nav @click.self="toggled = false" :data-toggled="toggled">
             <ul :data-toggled="toggled">

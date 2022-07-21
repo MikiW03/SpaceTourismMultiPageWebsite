@@ -15,10 +15,9 @@ const activeTechnology = ref<tech>("vehicle")
 const data = inject('data') as Ref<Data>
 
 const imgSrc = computed(() => {
-    const srcContent = window.innerWidth <= 1200
+    return window.innerWidth <= 1200
         ? data?.value.technology[techSet[activeTechnology.value]].images.landscape.slice(1)
         : data?.value.technology[techSet[activeTechnology.value]].images.portrait.slice(1)
-    return '/src' + srcContent
 })
 </script>
 
