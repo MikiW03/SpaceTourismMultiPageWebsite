@@ -7,7 +7,7 @@ const toggled = ref(false)
 
 const data = ref<Data>()
 onMounted(async () => {
-    const res = await fetch('../public/data.json');
+    const res = await fetch('data.json');
     const json = await res.json();
     data.value = json as Data
 })
