@@ -30,7 +30,7 @@ Screenshots below show only home site. To see other pages check [this link](http
 
 ### Links
 
-- Solution URL: https://www.frontendmentor.io/solutions/
+- Solution URL: https://www.frontendmentor.io/solutions/space-tourism-website-using-vuejs-qh-7F3b78r
 - Live Site URL: https://space-tourism-multi-page-website-dusky.vercel.app/
 
 ## My process
