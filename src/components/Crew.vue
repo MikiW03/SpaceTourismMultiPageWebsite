@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, Ref, ref } from 'vue';
+import { computed, inject, Ref, ref } from 'vue';
 
 import type { Data } from '../types/index'
 
@@ -12,13 +12,23 @@ enum crewMatesSet {
 
 type crewMate = "hurley" | "shuttleworth" | "glover" | "ansari"
 const activeCrewMate = ref<crewMate>("hurley")
+const activeCrewMateIndex = computed(() => crewMatesSet[activeCrewMate.value])
 
 const data = inject('data') as Ref<Data>
 const touched = ref("")
 
-const left = () => activeCrewMate.value = data?.value.crew[crewMatesSet[activeCrewMate.value] + 1].name.split(" ")[1].toLocaleLowerCase() as crewMate
-const right = () => activeCrewMate.value = data?.value.crew[crewMatesSet[activeCrewMate.value] - 1].name.split(" ")[1].toLocaleLowerCase() as crewMate
+const getLastName = (fullName: string) => fullName.split(" ")[fullName.split(" ").length - 1].toLocaleLowerCase()
 
+const leftSwipe = () => {
+    if (activeCrewMateIndex.value > 0) {
+        activeCrewMate.value = getLastName(data?.value.crew[activeCrewMateIndex.value - 1].name) as crewMate
+    }
+}
+const rightSwipe = () => {
+    if (activeCrewMateIndex.value < 3) {
+        activeCrewMate.value = getLastName(data?.value.crew[activeCrewMateIndex.value + 1].name) as crewMate
+    }
+}
 
 
 // SWIPE HANDLING
@@ -26,21 +36,20 @@ const right = () => activeCrewMate.value = data?.value.crew[crewMatesSet[activeC
 // document.addEventListener('touchstart', handleTouchStart, false);
 // document.addEventListener('touchmove', handleTouchMove, false);
 
-var xDown = null;
-var yDown = null;
+var xDown: number | null;
+var yDown: number | null;
 
-function getTouches(evt) {
-    return evt.touches ||             // browser API
-        evt.originalEvent.touches; // jQuery
+function getTouches(evt: TouchEvent) {
+    return evt.touches
 }
 
-function handleTouchStart(evt) {
+function handleTouchStart(evt: TouchEvent) {
     const firstTouch = getTouches(evt)[0];
     xDown = firstTouch.clientX;
     yDown = firstTouch.clientY;
 };
 
-function handleTouchMove(evt) {
+function handleTouchMove(evt: TouchEvent) {
     if (!xDown || !yDown) {
         return;
     }
@@ -54,11 +63,10 @@ function handleTouchMove(evt) {
     if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
         if (xDiff > 0) {
             /* right swipe */
-            console.log('right')
-            right()
+            rightSwipe()
         } else {
             /* left swipe */
-            left()
+            leftSwipe()
         }
     } else {
         if (yDiff > 0) {
@@ -79,8 +87,8 @@ function handleTouchMove(evt) {
     <section @touchstart="handleTouchStart($event)" @touchmove="handleTouchMove($event)">
         <h5><span>02</span>MEET YOUR CREW</h5>
         <div class="image-box">
-            <img :src="'/src' + data?.crew[crewMatesSet[activeCrewMate]].images.png.slice(1)"
-                :alt="'Image of ' + data?.crew[crewMatesSet[activeCrewMate]].name">
+            <img :src="'/src' + data?.crew[activeCrewMateIndex].images.png.slice(1)"
+                :alt="'Image of ' + data?.crew[activeCrewMateIndex].name">
         </div>
         <ul>
             <label class="container">
@@ -100,12 +108,12 @@ function handleTouchMove(evt) {
                 <span class="checkmark"></span>
             </label>
         </ul>
-        <h4>{{ data?.crew[crewMatesSet[activeCrewMate]].role }}</h4>
+        <h4>{{ data?.crew[activeCrewMateIndex].role }}</h4>
         <h3>{{
-            data?.crew[crewMatesSet[activeCrewMate]].name
-            }}</h3>
+                data?.crew[activeCrewMateIndex].name
+        }}</h3>
         <p>
-            {{ data?.crew[crewMatesSet[activeCrewMate]].bio }}
+            {{ data?.crew[activeCrewMateIndex].bio }}
         </p>
     </section>
 </template>
@@ -295,12 +303,12 @@ p {
         align-items: flex-end;
         justify-content: center;
         margin-top: 40px;
+        margin-bottom: 0;
 
         height: 572px;
     }
 
     img {
-        width: 456px;
         height: 572px
     }
 }
